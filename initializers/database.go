@@ -1,25 +1,25 @@
 package initializers
 
 import (
-	"log"
-	"os"
+    "log"
+    "os"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+    "gorm.io/driver/postgres"
+    "gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
-func ConnectDB(){
-	var err error
-	dsn := os.Getenv("DB_URL")
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+func ConnectDB() {
+    var err error
+    dsn := os.Getenv("DATABASE_URL")  // <-- aquí el cambio importante
+    DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
-	if err != nil {
-		log.Fatal("Fallo la conexion con la base de datos")
-	}
+    if err != nil {
+        log.Fatal("Fallo la conexion con la base de datos")
+    }
 }
 
 func GetDB() *gorm.DB {
-	return DB
+    return DB
 }
